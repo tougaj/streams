@@ -106,3 +106,4 @@ typings/
 package-lock.json
 js/**/*
 css/**/*
+streamList.json

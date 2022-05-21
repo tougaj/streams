@@ -18,3 +18,21 @@ export const DEFAULTS = {
 		apiPort: 9997,
 	},
 };
+
+interface IServerStreamSource {
+	type: string;
+	id: string;
+}
+
+export interface IServerStreamItem {
+	id: string;
+	confName: string;
+	source: IServerStreamSource | null;
+	sourceReady: boolean;
+	readers: { type: string }[];
+	conf: any;
+}
+
+export interface IServerStreams {
+	items: { [key: string]: IServerStreamItem };
+}

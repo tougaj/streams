@@ -26,7 +26,7 @@ $default-font: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ub
 }
 
 body {
-	// @extend %bg-default;
+	@extend %bg-default;
 	@extend %default-font;
 }
 
@@ -193,3 +193,11 @@ body {
 // 	padding: 0 0.25em;
 // 	border-radius: 0.25em;
 // }
+
+.stream-list__container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	grid-auto-flow: row dense;
+	grid-gap: 1rem;
+	align-items: start;
+}

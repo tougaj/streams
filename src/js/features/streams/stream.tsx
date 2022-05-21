@@ -6,8 +6,9 @@ import { DEFAULTS } from '../../init';
 interface IStreamProps extends React.AllHTMLAttributes<HTMLDivElement> {
 	streamId: string;
 	streamClassName?: string;
+	autoPlay?: boolean;
 }
-const Stream = ({ streamId, streamClassName }: IStreamProps) => {
+const Stream = ({ streamId, streamClassName, autoPlay = false }: IStreamProps) => {
 	const refPlayer = useRef<ReactPlayer>();
 	const [ready, setReady] = useState(false);
 
@@ -19,7 +20,7 @@ const Stream = ({ streamId, streamClassName }: IStreamProps) => {
 		<PlayerWrapper className={streamClassName}>
 			<Player
 				url={`${DEFAULTS.streamServer.address}:${DEFAULTS.streamServer.hlsPort}/${streamId}/index.m3u8`}
-				playing={ready}
+				playing={autoPlay && ready}
 				controls
 				width="100%"
 				height="100%"
