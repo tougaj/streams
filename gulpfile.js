@@ -75,7 +75,7 @@ function typeScripts() {
 	// );
 }
 
-const sDistDir = './dist';
+const sDistDir = './docs';
 
 const clean = () => del([sDistDir]);
 const webpackDev = () => runDevWebPack('js/**/*.js', './js/main.js');
@@ -112,7 +112,7 @@ gulp.task(
 			// 		.pipe(gulp.dest(sDistDir)),
 			() =>
 				gulp
-					.src(['./**/index.html', '!./node_modules/**', '!./dist/**'])
+					.src(['./**/index.html', '!./node_modules/**', '!./docs/**'])
 					.pipe(replace(/ts=\[\[0000000000\]\]/g, `ts=${new Date().valueOf()}`))
 					.pipe(gulp.dest(sDistDir)),
 			() =>
