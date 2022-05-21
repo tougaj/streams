@@ -1,0 +1,195 @@
+@import '_common';
+$top-main-gap: 64px;
+$dirty-top-main-gap: 56px;
+$dirty-main-gap: $top-main-gap - 8;
+$fixed-right-gap: 15px;
+$footer-height: 90px;
+$default-transition-duration: 0.3s;
+$serif: 'Times New Roman', Times, serif;
+$default-font: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans',
+	'Helvetica Neue', sans-serif;
+
+%default-font {
+	font-family: $default-font;
+}
+
+.top-main-gap {
+	top: $top-main-gap;
+}
+
+.dirty-main-gap {
+	top: $dirty-main-gap;
+}
+
+.bottom-0 {
+	bottom: 0;
+}
+
+body {
+	// @extend %bg-default;
+	@extend %default-font;
+}
+
+#app {
+	padding-top: $top-main-gap;
+	// padding-top: $dirty-main-gap;
+}
+
+.gray-400 {
+	color: var(--bs-gray-400, gray);
+}
+
+.z-index-3 {
+	z-index: 3;
+}
+
+.min-width-0 {
+	min-width: 0;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.bg-default {
+	@extend %bg-default;
+}
+
+// @keyframes keyframe-bounce {
+// 	0% {
+// 		transform: scale(0.8);
+// 	}
+// 	50% {
+// 		transform: scale(1.5);
+// 	}
+// 	100% {
+// 		transform: scale(0.8);
+// 	}
+// }
+// .animation-bounce {
+// 	animation: keyframe-bounce 2s infinite linear;
+// 	display: inline-block;
+// }
+
+// @keyframes keyframes-highlight {
+// 	0% {
+// 		background-color: var(--bs-warning, yellow);
+// 	}
+// 	100% {
+// 		background-color: #fff;
+// 	}
+// }
+// .animation-highlighted {
+// 	animation: 1s linear alternate 0.1s 1 keyframes-highlight;
+// }
+
+%small-text {
+	font-size: 0.8em;
+}
+.small-text,
+.text-small {
+	@extend %small-text;
+}
+
+.header__brand-image_lg {
+	width: 1.5em;
+	height: 1.5em;
+	margin: unset;
+	margin-top: -3px;
+}
+
+// .persistent-video {
+// 	$width: 25vw;
+// 	position: fixed;
+// 	left: 1rem;
+// 	bottom: 80px;
+// 	width: $width;
+// 	// height: $width * 0.5625;
+// }
+
+// .videos__list {
+// 	display: grid;
+// 	grid-auto-flow: row dense;
+// 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+// 	align-items: start;
+// }
+// .videos__card_active {
+// 	position: sticky;
+// 	top: $top-main-gap;
+// 	bottom: 0;
+// 	z-index: 1;
+// }
+// .videos__card-img-container {
+// 	padding-top: 56%; /* Player ratio: 100 / (1280 / 720) */
+// 	overflow: hidden;
+// }
+// .videos__card-img {
+// 	// height: 140px;
+// 	top: -17%;
+// 	left: 0;
+// 	// object-fit: cover;
+// }
+// .videos__card-img_np {
+// 	// filter: grayscale(100%);
+// 	filter: sepia(100%);
+// }
+// .videos__duration {
+// 	@extend %small-text;
+// 	position: absolute;
+// 	right: 0.5rem;
+// 	bottom: 0.5rem;
+// }
+// .videos__no {
+// 	@extend %small-text;
+// 	position: absolute;
+// 	left: 0.5rem;
+// 	bottom: 0.5rem;
+// }
+// .videos__text {
+// 	margin-top: -0.75rem;
+// 	p {
+// 		margin-bottom: 0.25em;
+// 		overflow-wrap: anywhere;
+// 		&:last-child {
+// 			margin-bottom: 0;
+// 		}
+// 	}
+// }
+// .videos__text {
+// 	margin-top: -0.75rem;
+// 	display: none;
+// 	// max-height: 25vh;
+// 	// overflow: hidden;
+// 	// display: none;
+// 	// z-index: 2;
+// 	border: 1px solid rgba(0, 0, 0, 0.125);
+// 	border-top: none;
+// 	p {
+// 		margin-bottom: 0.25em;
+// 		overflow-wrap: anywhere;
+// 	}
+// }
+// .videos__card {
+// 	max-height: 295px;
+// 	overflow: hidden;
+// 	&:hover {
+// 		overflow: visible;
+// 		z-index: 1;
+// 		.videos__text {
+// 			display: block;
+// 		}
+// 	}
+// }
+
+// .shadow-country {
+// 	box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+// }
+
+// .text_hl {
+// 	background-color: var(--bs-orange, yellow);
+// 	color: var(--bs-white, red);
+// 	font-weight: 500;
+// 	display: inline-block;
+// 	padding: 0 0.25em;
+// 	border-radius: 0.25em;
+// }

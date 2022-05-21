@@ -1,0 +1,192 @@
+// $blue: #007bff
+// $indigo: #6610f2
+// $purple: #6f42c1
+// $pink: #e83e8c
+// $red: #dc3545
+// $orange: #fd7e14
+// $yellow: #ffc107
+// $green: #28a745
+// $teal: #20c997
+// $cyan: #17a2b8
+// $white: #fff
+// $gray: #6c757d
+// $gray-dark: #343a40
+// $primary: #007bff
+// $secondary: #6c757d
+// $success: #28a745
+// $info: #17a2b8
+// $warning: #ffc107
+// $danger: #dc3545
+// $light: #f8f9fa
+// $dark: #343a40
+// $breakpoint-xs: 0
+// $breakpoint-sm: 576px
+// $breakpoint-md: 768px
+// $breakpoint-lg: 992px
+// $breakpoint-xl: 1200px
+
+$main-bg-color: #fefbfa
+
+$primary-dark-text: rgba(0, 0, 0, .87)
+$secondary-dark-text: rgba(0, 0, 0, .54)
+$disabled-dark-text: rgba(0, 0, 0, .38)
+$divider-dark-text: rgba(0, 0, 0, .12)
+$primary-light-text: #fff
+$secondary-light-text: rgba(255, 255, 255, .7)
+$disabled-light-text: rgba(255, 255, 255, .5)
+$divider-light-text: rgba(255, 255, 255, .12)
+$cool-dark-color: #495057
+
+$primary-dark-text-colors: #212020 $primary-dark-text
+$secondary-dark-text-colors: #757373 $secondary-dark-text
+$disabled-dark-text-colors: #9d9c9b $disabled-dark-text
+$divider-dark-text-colors: #dfdcdc $divider-dark-text
+$primary-light-text-colors: $primary-light-text
+$secondary-light-text-colors: #b3b3b3 $secondary-light-text
+$disabled-light-text-colors: #808080 $disabled-light-text
+$divider-light-text-colors: #1f1f1f $divider-light-text
+
+%bg-default
+	background-color: $main-bg-color
+
+// %semi-bold
+// 	font-weight: 500
+
+// %cursor-pointer
+// 	cursor: pointer
+
+// %small-caps
+// 	font-variant: small-caps
+
+// %img-fit-cover
+// 	object-position: center
+// 	object-fit: cover
+
+// %no-decoration
+// 	text-decoration: none !important
+
+// %multi-column
+// 	columns: 400px
+// 	columns: 45ch
+// 	column-gap: 2em
+// 	column-rule: 1px solid $secondary-dark-text
+
+// %serif
+// 	font-family: Lora, 'Times New Roman', Times, serif
+
+// %img-fluid
+// 	display: block
+// 	max-width: 100%
+// 	height: auto
+
+// %circle
+// 	border-radius: 50%
+
+=size($width, $height)
+	width: $width
+	height: $height
+
+=square($size)
+	+size($size, $size)
+
+// =bg-colors($colors)
+// 	@each $color in $colors
+// 		background-color: $color
+
+=colors($colors)
+	@each $color in $colors
+		color: $color
+
+// =border-colors($colors)
+// 	@each $color in $colors
+// 		border-color: $color
+
+// =params($param, $values)
+// 	@each $value in $values
+// 		#{$param}: $value
+
+// %primary-dark-text
+// 	+colors($primary-dark-text-colors)
+
+// %secondary-dark-text
+// 	+colors($secondary-dark-text-colors)
+
+// %disabled-dark-text
+// 	+colors($disabled-dark-text-colors)
+
+// %divider-dark-text
+// 	+colors($divider-dark-text-colors)
+
+// %primary-light-text
+// 	+colors($primary-light-text-colors)
+
+%secondary-light-text
+	+colors($secondary-light-text-colors)
+
+// %disabled-light-text
+// 	+colors($disabled-light-text-colors)
+
+// %divider-light-text
+// 	+colors($divider-light-text-colors)
+
+// .semi-dark-text
+// 	+colors(#888 rgba(0,0,0,0.5))
+
+// .semi-light-text
+// 	+colors(#aaa rgba(255,255,255,0.5))
+
+// .primary-dark-text
+// 	@extend %primary-dark-text
+
+// .secondary-dark-text
+// 	@extend %secondary-dark-text
+
+// .disabled-dark-text
+// 	@extend %disabled-dark-text
+
+// .divider-dark-text
+// 	@extend %divider-dark-text
+
+// .primary-light-text
+// 	@extend %primary-light-text
+
+.secondary-light-text
+	@extend %secondary-light-text
+
+// .disabled-light-text
+// 	@extend %disabled-light-text
+
+// .divider-light-text
+// 	@extend %divider-light-text
+
+// %default-font-size
+// 	font-size: 1rem
+
+// // Максимальные размеры окна
+// $maxHeightVh: 25 50 75 62
+// @each $height in $maxHeightVh
+// 	.mh-#{$height}
+// 		max-height: #{$height}vh !important
+
+// $status-colors: (primary: #007bff, secondary: #6c757d, muted: #6c757d, success: #28a745, danger: #dc3545, warning: #ffc107, dark: #343a40, light: #f8f9fa)
+// // Цвета svg-иконок
+// @each $status, $color in $status-colors
+// 	.text-#{$status}
+// 		&.icon
+// 			fill: $color !important
+// 	.bg-dark-#{$status}
+// 		background-color: darken($color, 10%)
+// 	.bg-light-#{$status}
+// 		background-color: desaturate(lighten($color, 10%), 20%)
+
+// // @for $index from 0 through 1
+// $zIndex: 0 1 9 99 999
+// @each $index in $zIndex
+// 	.z-index-#{$index}
+// 		z-index: $index !important
+
+// @for $index from 0 through 4
+// 	%opacity-#{$index * 25}
+// 		opacity: $index * 0.25
+// 	.opacity-#{$index * 25}
+// 		opacity: $index * 0.25 !important
