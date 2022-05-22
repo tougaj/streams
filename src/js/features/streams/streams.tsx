@@ -14,7 +14,7 @@ const Streams = ({}: IStreamsProps) => {
 				</div>
 			)}
 			<div className={streamId ? 'col-12 col-xl-4' : 'col-12'}>
-				<StreamList />
+				<StreamList activeStreamId={streamId} />
 			</div>
 		</div>
 	);

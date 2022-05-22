@@ -7,8 +7,9 @@ interface IStreamProps extends React.AllHTMLAttributes<HTMLDivElement> {
 	streamId: string;
 	streamClassName?: string;
 	autoPlay?: boolean;
+	thumbnailOnly?: boolean;
 }
-const Stream = ({ streamId, streamClassName, autoPlay = false }: IStreamProps) => {
+const Stream = ({ streamId, streamClassName, autoPlay = false, thumbnailOnly = false }: IStreamProps) => {
 	const refPlayer = useRef<ReactPlayer>();
 	const [ready, setReady] = useState(false);
 
@@ -20,8 +21,8 @@ const Stream = ({ streamId, streamClassName, autoPlay = false }: IStreamProps) =
 		<PlayerWrapper className={streamClassName}>
 			<Player
 				url={`${DEFAULTS.streamServer.address}:${DEFAULTS.streamServer.hlsPort}/${streamId}/index.m3u8`}
-				playing={autoPlay && ready}
-				controls
+				playing={autoPlay && !thumbnailOnly && ready}
+				controls={!thumbnailOnly}
 				width="100%"
 				height="100%"
 				// onProgress={onProgress}

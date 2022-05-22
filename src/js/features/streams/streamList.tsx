@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { showSystemError } from '../../alerts';
 import { DotSpinner } from '../../components/spinner';
-import { IServerStreamItem, IServerStreams } from '../../init';
+import { IServerStreamItem, IServerStreams, TStringWithUndefined } from '../../init';
 import Stream from './stream';
 
-interface IStreamListProps extends React.AllHTMLAttributes<HTMLDivElement> {}
-const StreamList = ({}: IStreamListProps) => {
+interface IStreamListProps extends React.AllHTMLAttributes<HTMLDivElement> {
+	activeStreamId: TStringWithUndefined;
+}
+const StreamList = ({ activeStreamId }: IStreamListProps) => {
 	const [streams, setStreams] = useState<IServerStreamItem[] | undefined>();
 
 	useEffect(() => {
@@ -20,17 +23,20 @@ const StreamList = ({}: IStreamListProps) => {
 						item.id = id;
 						return item;
 					})
-					.filter(({ sourceReady }) => sourceReady);
+					.filter(({ sourceReady, id }) => sourceReady);
 				setStreams(items);
 			})
 			.catch(showSystemError);
-	}, []);
+	}, [activeStreamId]);
 
 	if (!streams) return <DotSpinner>Завантаження відео...</DotSpinner>;
 	return (
 		<div className="stream-list__container">
-			{streams.map(({ id, readers }) => (
-				<Stream key={id} streamId={id} />
+			{streams.map(({ id }) => (
+				<Link key={id} to={id}>
+					<div className="text-center h4 mb-0">{id}</div>
+					<Stream streamId={id} thumbnailOnly />
+				</Link>
 			))}
 		</div>
 	);
