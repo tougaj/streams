@@ -11,5 +11,5 @@ export const StickyDiv = styled.div<IStickyDivProps>`
 	position: sticky;
 	top: ${(props) => props.top || '56px'};
 	z-index: ${(props) => props.zIndex || 1};
-	background-color: ${(props) => props.bg || '#fefbfa'};
+	background-color: ${(props) => props.bg || 'var(--bs-gray-200, lightgray)'};
 `;

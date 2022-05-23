@@ -5,6 +5,7 @@ import styled from 'styled-components';
 // import DateSelector from '../features/app/dateSelector';
 // import SearchForm from '../features/app/searchForm';
 import { DEFAULTS } from '../init';
+import Icon from './icon';
 
 interface INavHeaderProps extends React.AllHTMLAttributes<HTMLDivElement> {}
 const NavHeader = ({}: INavHeaderProps) => {
@@ -20,7 +21,9 @@ const NavHeader = ({}: INavHeaderProps) => {
 				</Navbar.Brand>
 				<Navbar.Toggle area-controls="navbarSupportedContent" />
 				<Navbar.Collapse id="navbarSupportedContent">
-					<div className="">Lorem ipsum dolor sit amet.</div>
+					<div className="secondary-light-text ms-auto">
+						<Icon name="tools">Сайт знаходиться в розробці</Icon>
+					</div>
 					{/* <SearchForm /> */}
 					{/* <DateSelector className="ms-auto" /> */}
 				</Navbar.Collapse>

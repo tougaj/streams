@@ -14,7 +14,7 @@ const MainStream = ({}: IMainStreamProps) => {
 			<Stream streamId={streamId} autoPlay />
 			<h3 className="text-center my-2">{streamId}</h3>
 			<div className="text-center mt-2">
-				<Link to="/stream" className="btn btn-outline-secondary">
+				<Link to="/stream" className="btn btn-secondary">
 					<Icon name="x-circle">Закрити</Icon>
 				</Link>
 			</div>

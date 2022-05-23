@@ -6,7 +6,7 @@ import { DEFAULTS } from '../init';
 interface INavFooterProps extends React.AllHTMLAttributes<HTMLDivElement> {}
 const NavFooter = ({}: INavFooterProps) => {
 	return (
-		<nav className="navbar navbar-light bg-light mt-auto">
+		<nav className="navbar navbar-dark bg-dark mt-auto">
 			<Container fluid={DEFAULTS.fluid as any}>
 				<div className="d-flex align-items-center">
 					<a className="navbar-brand" href="/">
