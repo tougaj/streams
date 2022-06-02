@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { showSystemError } from '../../alerts';
 import Icon from '../../components/icon';
 import { DotSpinner } from '../../components/spinner';
-import { IServerStreamItem, IServerStreams, TStringWithUndefined } from '../../init';
+import { DEFAULTS, IServerStreamItem, IServerStreams, TStringWithUndefined } from '../../init';
 import Stream from './stream';
 
 interface IStreamListProps extends React.AllHTMLAttributes<HTMLDivElement> {
@@ -13,7 +13,8 @@ const StreamList = ({ activeStreamId }: IStreamListProps) => {
 	const [streams, setStreams] = useState<IServerStreamItem[] | undefined>();
 
 	useEffect(() => {
-		fetch('streamList.json')
+		fetch(`${DEFAULTS.streamServer.address}:${DEFAULTS.streamServer.apiPort}/v1/paths/list`)
+			// fetch('streamList.json')
 			.then((response) => {
 				if (!response.ok) throw new Error(response.statusText);
 				return response.json();
