@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import styled from 'styled-components';
-import { DEFAULTS } from '../../init';
+import { DEFAULTS, STREAMS_UPDATE_INTERVAL } from '../../init';
 
 interface IStreamProps extends React.AllHTMLAttributes<HTMLDivElement> {
 	streamId: string;
@@ -10,24 +10,32 @@ interface IStreamProps extends React.AllHTMLAttributes<HTMLDivElement> {
 	thumbnailOnly?: boolean;
 }
 const Stream = ({ streamId, streamClassName, autoPlay = false, thumbnailOnly = false }: IStreamProps) => {
-	const refPlayer = useRef<ReactPlayer>();
+	// const refPlayer = useRef<ReactPlayer>();
 	const [ready, setReady] = useState(false);
+	const [timeStamp, setTimeStamp] = useState<number>(new Date().valueOf());
 
 	const onReady = () => {
 		setReady(true);
 	};
 
+	useEffect(() => {
+		const timer = setInterval(() => setTimeStamp(new Date().valueOf()), STREAMS_UPDATE_INTERVAL);
+		return () => clearInterval(timer);
+	}, [streamId]);
+
 	return (
 		<PlayerWrapper className={streamClassName}>
 			<Player
-				url={`${DEFAULTS.streamServer.address}:${DEFAULTS.streamServer.hlsPort}/${streamId}/index.m3u8`}
+				url={`${DEFAULTS.streamServer.address}:${DEFAULTS.streamServer.hlsPort}/${streamId}/index.m3u8?ts=${
+					thumbnailOnly ? timeStamp : ''
+				}`}
 				playing={autoPlay && !thumbnailOnly && ready}
 				controls={!thumbnailOnly}
 				width="100%"
 				height="100%"
 				// onProgress={onProgress}
 				onReady={onReady}
-				ref={refPlayer}
+				// ref={refPlayer}
 			/>
 		</PlayerWrapper>
 	);

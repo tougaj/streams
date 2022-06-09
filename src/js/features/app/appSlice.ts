@@ -1,35 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IServerStreamItem } from '../../init';
 
 export interface IAppSlice {
 	userId: string;
+	streams: IServerStreamItem[];
 }
 const initialState: IAppSlice = {
 	userId: '0',
+	streams: [],
 };
 export const appSlice = createSlice({
 	name: 'app',
 	initialState,
 	reducers: {
-		// changeYoutubeData: (state, action: PayloadAction<IYoutubeData>) => {
-		// 	state.youtubeData = action.payload;
-		// 	state.playedSeconds = action.payload.time;
-		// },
-		// changeYoutubeId: (state, action: PayloadAction<string | TStringWithUndefined>) => {
-		// 	state.youtubeData.id = action.payload;
-		// 	state.youtubeData.time = 0;
-		// 	state.playedSeconds = 0;
-		// },
-		// changeYoutubeTime: (state, action: PayloadAction<number>) => {
-		// 	state.youtubeData.time = action.payload;
-		// 	state.playedSeconds = action.payload;
-		// },
-		// changePlayedSeconds: (state, action: PayloadAction<number>) => {
-		// 	state.playedSeconds = action.payload;
-		// },
+		changeStreams: (state, action: PayloadAction<IServerStreamItem[]>) => {
+			state.streams = action.payload;
+		},
 	},
 });
 
-// export const { changeYoutubeData, changeYoutubeId, changeYoutubeTime, changePlayedSeconds } = appSlice.actions;
+export const { changeStreams } = appSlice.actions;
 
 // export const onChangeSearchParam = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => (
 // 	dispatch: AppDispatch

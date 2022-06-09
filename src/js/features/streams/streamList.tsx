@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { showSystemError } from '../../alerts';
 import Icon from '../../components/icon';
 import { DotSpinner } from '../../components/spinner';
-import { DEFAULTS, IServerStreamItem, IServerStreams, TStringWithUndefined } from '../../init';
+import { DEFAULTS, IServerStreams, STREAMS_UPDATE_INTERVAL, TStringWithUndefined } from '../../init';
+import { RootState } from '../../store';
+import { changeStreams } from '../app/appSlice';
 import Stream from './stream';
 
-interface IStreamListProps extends React.AllHTMLAttributes<HTMLDivElement> {
+interface IStreamListProps extends PropsFromRedux, React.AllHTMLAttributes<HTMLDivElement> {
 	activeStreamId: TStringWithUndefined;
 }
-const StreamList = ({ activeStreamId }: IStreamListProps) => {
-	const [streams, setStreams] = useState<IServerStreamItem[] | undefined>();
-
-	useEffect(() => {
+const StreamList = ({ activeStreamId, streams, changeStreams }: IStreamListProps) => {
+	const loadStreamList = () => {
 		fetch(`${DEFAULTS.streamServer.address}:${DEFAULTS.streamServer.apiPort}/v1/paths/list`)
 			// fetch('streamList.json')
 			.then((response) => {
@@ -26,9 +27,15 @@ const StreamList = ({ activeStreamId }: IStreamListProps) => {
 						return item;
 					})
 					.filter(({ sourceReady, id }) => sourceReady);
-				setStreams(items);
+				changeStreams(items);
 			})
 			.catch(showSystemError);
+	};
+
+	useEffect(() => {
+		loadStreamList();
+		const timer = setInterval(loadStreamList, STREAMS_UPDATE_INTERVAL);
+		return () => clearInterval(timer);
 	}, [activeStreamId]);
 
 	if (!streams) return <DotSpinner>Завантаження відео...</DotSpinner>;
@@ -47,4 +54,13 @@ const StreamList = ({ activeStreamId }: IStreamListProps) => {
 	);
 };
 
-export default StreamList;
+const mapState = (state: RootState) => ({
+	streams: state.app.streams,
+});
+
+const mapDispatch = { changeStreams };
+
+const connector = connect(mapState, mapDispatch);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(StreamList);

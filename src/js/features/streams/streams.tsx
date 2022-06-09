@@ -9,11 +9,11 @@ const Streams = ({}: IStreamsProps) => {
 	return (
 		<div className="row">
 			{streamId && (
-				<div className="col-12 col-xl-8">
+				<div className="col-12 col-lg-9 col-xxl-10">
 					<Outlet />
 				</div>
 			)}
-			<div className={streamId ? 'col-12 col-xl-4' : 'col-12'}>
+			<div className={streamId ? 'col-12 col-lg-3 col-xxl-2' : 'col-12'}>
 				<StreamList activeStreamId={streamId} />
 			</div>
 		</div>
