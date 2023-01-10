@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { BsEye } from 'react-icons/bs';
-import { FaPlane } from 'react-icons/fa';
+import { IoAirplane, IoAirplaneOutline } from 'react-icons/io5';
 import { connect, ConnectedProps } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { showSystemError } from '../../alerts';
@@ -47,7 +46,7 @@ const StreamList = ({ activeStreamId, streams, changeStreams }: IStreamListProps
 				<Link key={id} to={id} className={id === activeStreamId ? 'text-primary' : 'text-secondary'}>
 					<Stream streamId={id} thumbnailOnly />
 					<div className="text-center fs-4">
-						<TextIcon Icon={id !== activeStreamId ? FaPlane : BsEye} className="me-1">
+						<TextIcon Icon={id !== activeStreamId ? IoAirplaneOutline : IoAirplane} className="me-1">
 							{id}
 						</TextIcon>
 					</div>

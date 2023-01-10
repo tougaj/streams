@@ -1,19 +1,18 @@
-import React from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import StreamList from './streamList';
 
-interface IStreamsProps extends React.AllHTMLAttributes<HTMLDivElement> {}
-const Streams = ({}: IStreamsProps) => {
+// interface IStreamsProps extends React.AllHTMLAttributes<HTMLDivElement> {}
+const Streams = () => {
 	const { streamId } = useParams<'streamId'>();
 
 	return (
 		<div className="row">
 			{streamId && (
-				<div className="col-12 col-lg-9 col-xxl-10">
+				<div className="col-12 col-lg-9">
 					<Outlet />
 				</div>
 			)}
-			<div className={streamId ? 'col-12 col-lg-3 col-xxl-2' : 'col-12'}>
+			<div className={streamId ? 'col-12 col-lg-3' : 'col-12'}>
 				<StreamList activeStreamId={streamId} />
 			</div>
 		</div>
