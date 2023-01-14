@@ -1,7 +1,2 @@
 # PORT=3001
-AUTH0_AUDIENCE=<Your Audience>
-AUTH0_ISSUER_BASE_URL=<Your Base URL>
-AUTH0_DEV_AUDIENCE=<Your Dev Audience>"
-AUTH0_DEV_ISSUER_BASE_URL=<Your Dev Base URL>
-SOLR_SERVER="http://127.0.0.1:8983"
 # PROXY="http(s)://<userName>:<password>@<proxyAddress>:<proxyPort>/"

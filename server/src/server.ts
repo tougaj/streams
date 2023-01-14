@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import path from 'path';
 import * as rfs from 'rotating-file-stream';
 import { environmentInit, IMyError, isProduction } from './common';
-// import videosRouter from './routers/videos';
+import streamList from './routers/streamList';
 
 process.on('SIGINT', function () {
 	console.log('Exiting...');
@@ -88,7 +88,7 @@ if (isProduction) {
 	);
 }
 
-// app.use('/api', videosRouter);
+app.use('/api', streamList);
 
 app.use((error: IMyError, req: any, res: any, next: any) => {
 	// console.log('Error status: ', error.status);
