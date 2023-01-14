@@ -103,7 +103,6 @@ typings/
 .tern-port
 
 # Файли проекту
-package-lock.json
 js/**/*
 css/**/*
 streamList.json
