@@ -21,7 +21,6 @@ router.get(
 		}
 
 		const list = await response.json();
-		console.log(list);
 		res.json(list);
 	})
 );

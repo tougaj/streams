@@ -28,7 +28,6 @@ router.get('/streamList', (0, express_async_handler_1.default)((req, res, next) 
         throw (0, http_errors_1.default)(response.status, yield response.text());
     }
     const list = yield response.json();
-    console.log(list);
     res.json(list);
 })));
 exports.default = router;

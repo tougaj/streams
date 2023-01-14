@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { showSystemError } from '../../alerts';
 import { DotSpinner } from '../../components/spinner';
 import TextIcon from '../../components/textIcon';
-import { DEFAULTS, IServerStreams, STREAMS_UPDATE_INTERVAL, TStringWithUndefined } from '../../init';
+import { IServerStreams, STREAMS_UPDATE_INTERVAL, TStringWithUndefined } from '../../init';
 import { RootState } from '../../store';
 import { changeStreams } from '../app/appSlice';
 import Stream from './stream';
@@ -15,7 +15,7 @@ interface IStreamListProps extends PropsFromRedux, React.AllHTMLAttributes<HTMLD
 }
 const StreamList = ({ activeStreamId, streams, changeStreams }: IStreamListProps) => {
 	const loadStreamList = () => {
-		fetch(`${DEFAULTS.streamServer.address}:${DEFAULTS.streamServer.apiPort}/v1/paths/list`)
+		fetch('api/streamList')
 			// fetch('streamList.json')
 			.then((response) => {
 				if (!response.ok) throw new Error(response.statusText);
