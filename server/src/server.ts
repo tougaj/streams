@@ -62,7 +62,8 @@ app.use(
 			res.set('Cache-control', 'no-cache, must-revalidate');
 
 			const CSP = [
-				"default-src 'self' 132.226.223.144:8888 *.google-analytics.com",
+				"default-src 'self' blob: *.google-analytics.com",
+				"connect-src 'self' http: *.google-analytics.com 132.226.223.144",
 				// "base-uri 'self'",
 				'block-all-mixed-content',
 				"font-src 'self' https: data:",
