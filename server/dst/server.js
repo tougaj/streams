@@ -68,37 +68,38 @@ else {
     app.use((0, morgan_1.default)('dev'));
 }
 // Express only serves static assets in production
-if (common_1.isProduction) {
-    app.use('/', express_1.default.static(path_1.default.join(__dirname, '../../client/build'), {
-        setHeaders: function setHeaders(res, path, stat) {
-            if (!path.endsWith('.html'))
-                return;
-            res.set('Cache-control', 'no-cache, must-revalidate');
-            const CSP = [
-                "default-src 'self' *.auth0.com *.youtube.com *.google-analytics.com",
-                // "base-uri 'self'",
-                'block-all-mixed-content',
-                "font-src 'self' https: data:",
-                "form-action 'self'",
-                "frame-ancestors 'self'",
-                "img-src 'self' data: *",
-                "object-src 'none'",
-                "script-src 'self' 'unsafe-inline' blob: *.youtube.com *.googletagmanager.com",
-                // "script-src-attr 'none'",
-                "style-src 'self' https: 'unsafe-inline'",
-                'upgrade-insecure-requests',
-            ].join(';');
-            //https://developer.mozilla.org/ru/docs/Web/HTTP/CSP
-            res.set('Content-Security-Policy', CSP);
-            // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy
-            res.set('Cross-Origin-Embedder-Policy', 'unsafe-none');
-            // res.set('Access-Control-Allow-Headers', '*');
-            // res.set('Access-Control-Allow-Methods', '*');
-            // res.set('Access-Control-Allow-Origin', '*');
-            // res.set('Cross-Origin-Resource-Policy', 'cross-origin');
-        },
-    }));
-}
+// if (isProduction) {
+app.use('/', express_1.default.static(path_1.default.join(__dirname, '../../client/build'), {
+    setHeaders: function setHeaders(res, path, stat) {
+        if (!path.endsWith('.html'))
+            return;
+        res.set('Cache-control', 'no-cache, must-revalidate');
+        const CSP = [
+            "default-src 'self' 132.226.223.144:8888 *.google-analytics.com",
+            // "base-uri 'self'",
+            'block-all-mixed-content',
+            "font-src 'self' https: data:",
+            "form-action 'self'",
+            "frame-ancestors 'self'",
+            "img-src 'self' data: *",
+            "object-src 'none'",
+            // "script-src 'self' 'unsafe-inline' blob: *.youtube.com *.googletagmanager.com",
+            "script-src 'self' 'unsafe-inline' blob: cdn.jsdelivr.net *.googletagmanager.com",
+            // "script-src-attr 'none'",
+            "style-src 'self' https: 'unsafe-inline'",
+            'upgrade-insecure-requests',
+        ].join(';');
+        //https://developer.mozilla.org/ru/docs/Web/HTTP/CSP
+        res.set('Content-Security-Policy', CSP);
+        // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Embedder-Policy
+        res.set('Cross-Origin-Embedder-Policy', 'unsafe-none');
+        // res.set('Access-Control-Allow-Headers', '*');
+        // res.set('Access-Control-Allow-Methods', '*');
+        // res.set('Access-Control-Allow-Origin', '*');
+        // res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+    },
+}));
+// }
 app.use('/api', streamList_1.default);
 app.use((error, req, res, next) => {
     // console.log('Error status: ', error.status);
