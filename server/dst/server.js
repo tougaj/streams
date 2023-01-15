@@ -87,7 +87,7 @@ app.use('/', express_1.default.static(path_1.default.join(__dirname, '../../clie
             "script-src 'self' 'unsafe-inline' blob: cdn.jsdelivr.net *.googletagmanager.com",
             // "script-src-attr 'none'",
             "style-src 'self' https: 'unsafe-inline'",
-            'upgrade-insecure-requests',
+            // 'upgrade-insecure-requests',
         ].join(';');
         //https://developer.mozilla.org/ru/docs/Web/HTTP/CSP
         res.set('Content-Security-Policy', CSP);
