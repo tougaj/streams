@@ -106,3 +106,4 @@ typings/
 js/**/*
 css/**/*
 streamList.json
+ecosystem.config.json
