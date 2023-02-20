@@ -18,10 +18,11 @@ const http_errors_1 = __importDefault(require("http-errors"));
 const node_fetch_1 = __importDefault(require("node-fetch"));
 const common_1 = require("../common");
 const router = express_1.default.Router();
+const STREAM_LIST_ADDRESS = process.env.STREAM_LIST_ADDRESS || '"http://127.0.0.1:8080/v1/paths/list';
 router.get('/streamList', (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     // res.setHeader('Cache-control', isProduction ? 'private, max-age=300' : 'no-cache, must-revalidate');
     res.setHeader('Cache-control', 'no-cache, must-revalidate');
-    const response = yield (0, node_fetch_1.default)('http://132.226.223.144:9997/v1/paths/list', {
+    const response = yield (0, node_fetch_1.default)(STREAM_LIST_ADDRESS, {
         agent: common_1.proxyAgent,
     });
     if (!response.ok) {

@@ -5,6 +5,7 @@ import fetch from 'node-fetch';
 import { proxyAgent } from '../common';
 
 const router = express.Router();
+const STREAM_LIST_ADDRESS = process.env.STREAM_LIST_ADDRESS || '"http://127.0.0.1:8080/v1/paths/list';
 
 router.get(
 	'/streamList',
@@ -12,7 +13,7 @@ router.get(
 		// res.setHeader('Cache-control', isProduction ? 'private, max-age=300' : 'no-cache, must-revalidate');
 		res.setHeader('Cache-control', 'no-cache, must-revalidate');
 
-		const response = await fetch('http://132.226.223.144:9997/v1/paths/list', {
+		const response = await fetch(STREAM_LIST_ADDRESS, {
 			agent: proxyAgent,
 		});
 
