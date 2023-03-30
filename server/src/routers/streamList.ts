@@ -5,7 +5,11 @@ import fetch from 'node-fetch';
 import { proxyAgent } from '../common';
 
 const router = express.Router();
-const STREAM_LIST_ADDRESS = process.env.STREAM_LIST_ADDRESS || '"http://127.0.0.1:8080/v1/paths/list';
+const STREAM_LIST_ADDRESS = process.env.STREAM_LIST_ADDRESS;
+if (!STREAM_LIST_ADDRESS) {
+	console.error('Помилка: не задано адресу списку стрімів');
+	process.exit(1);
+}
 
 router.get(
 	'/streamList',

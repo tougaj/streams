@@ -18,7 +18,11 @@ const http_errors_1 = __importDefault(require("http-errors"));
 const node_fetch_1 = __importDefault(require("node-fetch"));
 const common_1 = require("../common");
 const router = express_1.default.Router();
-const STREAM_LIST_ADDRESS = process.env.STREAM_LIST_ADDRESS || '"http://127.0.0.1:8080/v1/paths/list';
+const STREAM_LIST_ADDRESS = process.env.STREAM_LIST_ADDRESS;
+if (!STREAM_LIST_ADDRESS) {
+    console.error('Помилка: не задано адресу списку стрімів');
+    process.exit(1);
+}
 router.get('/streamList', (0, express_async_handler_1.default)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     // res.setHeader('Cache-control', isProduction ? 'private, max-age=300' : 'no-cache, must-revalidate');
     res.setHeader('Cache-control', 'no-cache, must-revalidate');
