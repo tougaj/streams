@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import styled from 'styled-components';
-import { DEFAULTS, STREAMS_UPDATE_INTERVAL } from '../../init';
+import { DEFAULTS, THUMBNAILS_UPDATE_INTERVAL } from '../../init';
 
 interface IStreamProps extends React.AllHTMLAttributes<HTMLDivElement> {
 	streamId: string;
@@ -19,7 +19,7 @@ const Stream = ({ streamId, streamClassName, autoPlay = false, thumbnailOnly = f
 	};
 
 	useEffect(() => {
-		const timer = setInterval(() => setTimeStamp(new Date().valueOf()), STREAMS_UPDATE_INTERVAL);
+		const timer = setInterval(() => setTimeStamp(new Date().valueOf()), THUMBNAILS_UPDATE_INTERVAL);
 		return () => clearInterval(timer);
 	}, [streamId]);
 

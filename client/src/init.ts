@@ -15,7 +15,8 @@ export const DEFAULTS = {
 	},
 };
 
-export const STREAMS_UPDATE_INTERVAL = (1 * 60 + 0) * 1000;
+export const STREAMS_UPDATE_INTERVAL = (1 * 30 + 0) * 1000;
+export const THUMBNAILS_UPDATE_INTERVAL = (1 * 15 + 0) * 1000;
 
 interface IServerStreamSource {
 	type: string;
