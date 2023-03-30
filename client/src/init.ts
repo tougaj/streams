@@ -11,6 +11,7 @@ export const DEFAULTS = {
 	streamServer: {
 		address: 'http://132.226.223.144',
 		hlsPort: 8888,
+		webRtcPort: 9889,
 		apiPort: 9997,
 	},
 };

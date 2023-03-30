@@ -15,8 +15,8 @@ const MainStream = () => {
 	return (
 		<StickyDiv className="mb-2">
 			<Stream streamId={streamId} autoPlay />
-			<h3 className="text-center my-2">{streamId}</h3>
-			<div className="text-center mt-2">
+			<div className="d-flex justify-content-between align-items-center my-2">
+				<h3 className="text-center m-0">{streamId}</h3>
 				<Link to="/stream" className="btn btn-secondary">
 					<TextIcon Icon={BsXCircle}>Закрити</TextIcon>
 				</Link>

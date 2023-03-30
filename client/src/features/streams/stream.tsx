@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 import styled from 'styled-components';
 import { DEFAULTS, THUMBNAILS_UPDATE_INTERVAL } from '../../init';
@@ -10,12 +10,18 @@ interface IStreamProps extends React.AllHTMLAttributes<HTMLDivElement> {
 	thumbnailOnly?: boolean;
 }
 const Stream = ({ streamId, streamClassName, autoPlay = false, thumbnailOnly = false }: IStreamProps) => {
-	// const refPlayer = useRef<ReactPlayer>();
+	const refPlayer = useRef<ReactPlayer>();
 	const [ready, setReady] = useState(false);
 	const [timeStamp, setTimeStamp] = useState<number>(new Date().valueOf());
 
 	const onReady = () => {
 		setReady(true);
+	};
+
+	const onDuration = (duration: number) => {
+		if (autoPlay) {
+			refPlayer.current?.seekTo(1, 'fraction');
+		}
 	};
 
 	useEffect(() => {
@@ -35,7 +41,8 @@ const Stream = ({ streamId, streamClassName, autoPlay = false, thumbnailOnly = f
 				height="100%"
 				// onProgress={onProgress}
 				onReady={onReady}
-				// ref={refPlayer}
+				ref={refPlayer}
+				onDuration={onDuration}
 			/>
 		</PlayerWrapper>
 	);

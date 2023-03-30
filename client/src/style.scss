@@ -42,6 +42,10 @@ body {
 	scale: 162%;
 }
 
+.mt-n1 {
+	margin-top: -0.25em;
+}
+
 .gray-400 {
 	color: var(--bs-gray-400, gray);
 }
@@ -79,7 +83,7 @@ body {
 
 .stream-list__container {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 	grid-auto-flow: row dense;
 	grid-gap: 1rem;
 	align-items: start;
