@@ -1,15 +1,11 @@
-import classNames from 'classnames';
 import React, { useEffect } from 'react';
-import { BsBroadcast, BsEye, BsEyeFill } from 'react-icons/bs';
-import { connect, ConnectedProps } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { ConnectedProps, connect } from 'react-redux';
 import { showSystemError } from '../../alerts';
 import { DotSpinner } from '../../components/spinner';
-import TextIcon from '../../components/textIcon';
-import { DEFAULTS, IServerStreams, STREAMS_UPDATE_INTERVAL, TStringWithUndefined } from '../../init';
+import { IServerStreams, STREAMS_UPDATE_INTERVAL, TStringWithUndefined } from '../../init';
 import { RootState } from '../../store';
 import { changeStreams } from '../app/appSlice';
-import Stream from './stream';
+import StreamListItem from './streamListItem';
 
 interface IStreamListProps extends PropsFromRedux, React.AllHTMLAttributes<HTMLDivElement> {
 	activeStreamId: TStringWithUndefined;
@@ -44,29 +40,7 @@ const StreamList = ({ activeStreamId, streams, changeStreams }: IStreamListProps
 	return (
 		<div className="stream-list__container">
 			{streams.map(({ id }) => (
-				<div key={id} className="">
-					<Link to={id} className={id === activeStreamId ? 'text-primary' : 'text-secondary'}>
-						<Stream streamId={id} thumbnailOnly />
-					</Link>
-					<div className="d-flex justify-content-between align-items-center gap-1">
-						<Link
-							to={id}
-							className={classNames('fs-4 text-truncate', id === activeStreamId ? 'text-primary' : 'text-secondary')}
-						>
-							<TextIcon Icon={id === activeStreamId ? BsEyeFill : BsEye}>{id}</TextIcon>
-						</Link>
-						<a
-							target="_blank"
-							rel="noreferrer"
-							href={`${DEFAULTS.streamServer.address}:${DEFAULTS.streamServer.webRtcPort}/${id}/`}
-							className="text-secondary text-nowrap mt-1"
-						>
-							<TextIcon Icon={BsBroadcast} iconLast>
-								RTC
-							</TextIcon>
-						</a>
-					</div>
-				</div>
+				<StreamListItem key={id} streamId={id} active={id === activeStreamId} />
 			))}
 		</div>
 	);

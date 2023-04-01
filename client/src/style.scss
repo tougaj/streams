@@ -45,6 +45,12 @@ body {
 .mt-n1 {
 	margin-top: -0.25em;
 }
+.mt-n2 {
+	margin-top: -0.5em;
+}
+.mt-n3 {
+	margin-top: -1em;
+}
 
 .gray-400 {
 	color: var(--bs-gray-400, gray);
@@ -87,4 +93,18 @@ body {
 	grid-auto-flow: row dense;
 	grid-gap: 1rem;
 	align-items: start;
+}
+
+.player__wrapper {
+	position: relative;
+	padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+}
+.player__player {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.bg-dark-glass {
+	background-color: rgba(0, 0, 0, 0.15) !important;
 }

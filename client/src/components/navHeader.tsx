@@ -3,13 +3,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import styled from 'styled-components';
 // import DateSelector from '../features/app/dateSelector';
 // import SearchForm from '../features/app/searchForm';
-import { BsTools } from 'react-icons/bs';
+import { Badge } from 'react-bootstrap';
 import LogoImage from '../img/app.webp';
 import { DEFAULTS } from '../init';
-import TextIcon from './textIcon';
+import { selectAppState, useAppSelector } from '../store';
 
 // interface INavHeaderProps extends React.AllHTMLAttributes<HTMLDivElement> {}
 const NavHeader = () => {
+	const { streams } = useAppSelector(selectAppState);
+
 	return (
 		<Navbar bg="primary" variant="dark" expand="md" fixed="top">
 			<Container fluid={DEFAULTS.fluid as any}>
@@ -19,13 +21,15 @@ const NavHeader = () => {
 				</Navbar.Brand>
 				<Navbar.Toggle area-controls="navbarSupportedContent" />
 				<Navbar.Collapse id="navbarSupportedContent">
-					<div className="secondary-light-text ms-auto">
+					<Navbar.Text className="ms-auto">
+						Активних трансляцій:
+						<Badge className="ms-1 bg-dark-glass">{streams.length}</Badge>
+					</Navbar.Text>
+					{/* <div className="secondary-light-text ms-auto">
 						<TextIcon Icon={BsTools} className="icon-lg me-2">
 							Сайт знаходиться в розробці
 						</TextIcon>
-					</div>
-					{/* <SearchForm /> */}
-					{/* <DateSelector className="ms-auto" /> */}
+					</div> */}
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>
