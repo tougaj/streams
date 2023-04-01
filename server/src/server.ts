@@ -64,6 +64,7 @@ app.use(
 			const CSP = [
 				"default-src 'self' blob: *.google-analytics.com",
 				"connect-src 'self' http: *.google-analytics.com 132.226.223.144",
+				'frame-src http: 132.226.223.144',
 				// "base-uri 'self'",
 				'block-all-mixed-content',
 				"font-src 'self' https: data:",
