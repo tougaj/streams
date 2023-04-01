@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IServerStreamItem } from '../../init';
+import { IServerStreamItem, IStreamServerParams } from '../../init';
 
 export interface IAppSlice {
 	userId: string;
+	streamServerParams?: IStreamServerParams;
 	streams: IServerStreamItem[];
 }
 const initialState: IAppSlice = {
 	userId: '0',
+	streamServerParams: undefined,
 	streams: [],
 };
 export const appSlice = createSlice({
@@ -16,10 +18,13 @@ export const appSlice = createSlice({
 		changeStreams: (state, action: PayloadAction<IServerStreamItem[]>) => {
 			state.streams = action.payload;
 		},
+		changeStreamServerParams: (state, action: PayloadAction<IStreamServerParams>) => {
+			state.streamServerParams = action.payload;
+		},
 	},
 });
 
-export const { changeStreams } = appSlice.actions;
+export const { changeStreams, changeStreamServerParams } = appSlice.actions;
 
 // export const onChangeSearchParam = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => (
 // 	dispatch: AppDispatch

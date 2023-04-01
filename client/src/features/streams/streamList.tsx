@@ -10,24 +10,29 @@ import StreamListItem from './streamListItem';
 interface IStreamListProps extends PropsFromRedux, React.AllHTMLAttributes<HTMLDivElement> {
 	activeStreamId: TStringWithUndefined;
 }
-const StreamList = ({ activeStreamId, streams, changeStreams }: IStreamListProps) => {
-	const loadStreamList = () => {
-		fetch('api/streamList')
-			// fetch('streamList.json')
-			.then((response) => {
-				if (!response.ok) throw new Error(response.statusText);
-				return response.json();
-			})
-			.then((r: IServerStreams) => {
-				const items = Object.entries(r.items)
-					.map(([id, item]) => {
-						item.id = id;
-						return item;
-					})
-					.filter(({ sourceReady, id }) => sourceReady);
-				changeStreams(items);
-			})
-			.catch(showSystemError);
+const StreamList = ({ activeStreamId, streams, changeStreams, streamServerParams }: IStreamListProps) => {
+	const loadStreamList = async () => {
+		try {
+			const response = await fetch(`api/streamList`, {
+				// headers: {
+				// 	Authorization: `Bearer ${accessToken}`,
+				// 	'c-user-email': userEmail
+				// },
+			});
+			if (!response.ok) {
+				throw new Error(`${response.status} (${response.statusText}): ${await response.text()}`);
+			}
+			const r = (await response.json()) as IServerStreams;
+			const items = Object.entries(r.items)
+				.map(([id, item]) => {
+					item.id = id;
+					return item;
+				})
+				.filter(({ sourceReady, id }) => sourceReady);
+			changeStreams(items);
+		} catch (error) {
+			showSystemError(error as Error);
+		}
 	};
 
 	useEffect(() => {
@@ -40,7 +45,7 @@ const StreamList = ({ activeStreamId, streams, changeStreams }: IStreamListProps
 	return (
 		<div className="stream-list__container">
 			{streams.map(({ id }) => (
-				<StreamListItem key={id} streamId={id} active={id === activeStreamId} />
+				<StreamListItem key={id} streamId={id} active={id === activeStreamId} streamServerParams={streamServerParams} />
 			))}
 		</div>
 	);
@@ -48,6 +53,7 @@ const StreamList = ({ activeStreamId, streams, changeStreams }: IStreamListProps
 
 const mapState = (state: RootState) => ({
 	streams: state.app.streams,
+	streamServerParams: state.app.streamServerParams,
 });
 
 const mapDispatch = { changeStreams };

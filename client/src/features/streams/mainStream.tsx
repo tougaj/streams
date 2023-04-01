@@ -13,7 +13,8 @@ import Stream from './stream';
 const MainStream = () => {
 	const { streamId } = useParams<'streamId'>();
 	const { streams } = useAppSelector(selectAppState);
-	const [live, setLive] = useState(true);
+	const { streamServerParams } = useAppSelector(selectAppState);
+	const [live, setLive] = useState(!!streamServerParams?.webRtcPort);
 
 	const onLiveClick = (event: React.MouseEvent<HTMLInputElement>) => {
 		setLive((live) => !live);
@@ -28,24 +29,26 @@ const MainStream = () => {
 					{streamId}::{DEFAULTS.pageTitle}
 				</title>
 			</Helmet>
-			<Stream streamId={streamId} live={live} />
+			<Stream streamId={streamId} live={live} streamServerParams={streamServerParams} />
 			<div className="d-flex justify-content-between align-items-center my-2 gap-1">
 				<h3 className="text-center m-0 text-truncate">
 					<BsFillCameraVideoFill /> {streamId}
 				</h3>
-				<Form.Check
-					type="switch"
-					id="cbMainIsLive"
-					label={
-						<>
-							<span className="d-none d-sm-inline">Пряма трансляція</span>
-							<span className="d-sm-none">live</span>
-						</>
-					}
-					checked={live}
-					onClick={onLiveClick}
-					className="text-truncate"
-				/>
+				{streamServerParams?.hlsPort && streamServerParams.webRtcPort && (
+					<Form.Check
+						type="switch"
+						id="cbMainIsLive"
+						label={
+							<>
+								<span className="d-none d-sm-inline">Пряма трансляція</span>
+								<span className="d-sm-none">live</span>
+							</>
+						}
+						checked={live}
+						onClick={onLiveClick}
+						className="text-nowrap"
+					/>
+				)}
 				<Link to="/stream" className="btn btn-outline-secondary">
 					<TextIcon Icon={BsPower} className="icon-lg">
 						<span className="d-none d-sm-inline">Вимкнути</span>

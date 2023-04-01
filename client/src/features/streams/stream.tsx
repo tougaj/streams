@@ -1,15 +1,22 @@
 import classNames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
-import { DEFAULTS, THUMBNAILS_UPDATE_INTERVAL } from '../../init';
+import { IStreamServerParams, THUMBNAILS_UPDATE_INTERVAL } from '../../init';
 
 interface IStreamProps extends React.AllHTMLAttributes<HTMLDivElement> {
 	streamId: string;
 	streamClassName?: string;
 	thumbnailOnly?: boolean;
 	live?: boolean;
+	streamServerParams?: IStreamServerParams;
 }
-const Stream = ({ streamId, streamClassName, thumbnailOnly = false, live = false }: IStreamProps) => {
+const Stream = ({
+	streamId,
+	streamClassName,
+	thumbnailOnly = false,
+	live = false,
+	streamServerParams,
+}: IStreamProps) => {
 	const refPlayer = useRef<ReactPlayer>(null);
 	const [ready, setReady] = useState(false);
 	const [timeStamp, setTimeStamp] = useState<number>(new Date().valueOf());
@@ -29,11 +36,14 @@ const Stream = ({ streamId, streamClassName, thumbnailOnly = false, live = false
 		return () => clearInterval(timer);
 	}, [streamId]);
 
+	if (!streamServerParams?.address) return <></>;
+	const isHlsPlayer = streamServerParams.hlsPort !== null && (thumbnailOnly || !live || !streamServerParams.webRtcPort);
+
 	return (
 		<div className={classNames(streamClassName, 'player__wrapper')}>
-			{thumbnailOnly || !live ? (
+			{isHlsPlayer ? (
 				<ReactPlayer
-					url={`${DEFAULTS.streamServer.address}:${DEFAULTS.streamServer.hlsPort}/${streamId}/index.m3u8?ts=${
+					url={`${streamServerParams.address}:${streamServerParams.hlsPort}/${streamId}/index.m3u8?ts=${
 						thumbnailOnly ? timeStamp : ''
 					}`}
 					playing={!thumbnailOnly && ready}
@@ -48,7 +58,7 @@ const Stream = ({ streamId, streamClassName, thumbnailOnly = false, live = false
 				/>
 			) : (
 				<iframe
-					src={`${DEFAULTS.streamServer.address}:${DEFAULTS.streamServer.webRtcPort}/${streamId}/`}
+					src={`${streamServerParams.address}:${streamServerParams.webRtcPort}/${streamId}/`}
 					width="100%"
 					height="100%"
 					className="player__player"

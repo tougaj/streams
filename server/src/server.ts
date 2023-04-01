@@ -5,7 +5,8 @@ import morgan from 'morgan';
 import path from 'path';
 import * as rfs from 'rotating-file-stream';
 import { environmentInit, IMyError, isProduction } from './common';
-import streamList from './routers/streamList';
+import paramsRouter from './routers/params';
+import streamListRouter from './routers/streamList';
 
 process.on('SIGINT', function () {
 	console.log('Exiting...');
@@ -91,7 +92,8 @@ app.use(
 );
 // }
 
-app.use('/api', streamList);
+app.use('/api', streamListRouter);
+app.use('/api', paramsRouter);
 
 app.use((error: IMyError, req: any, res: any, next: any) => {
 	// console.log('Error status: ', error.status);

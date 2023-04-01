@@ -33,6 +33,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const path_1 = __importDefault(require("path"));
 const rfs = __importStar(require("rotating-file-stream"));
 const common_1 = require("./common");
+const params_1 = __importDefault(require("./routers/params"));
 const streamList_1 = __importDefault(require("./routers/streamList"));
 process.on('SIGINT', function () {
     console.log('Exiting...');
@@ -103,6 +104,7 @@ app.use('/', express_1.default.static(path_1.default.join(__dirname, '../../clie
 }));
 // }
 app.use('/api', streamList_1.default);
+app.use('/api', params_1.default);
 app.use((error, req, res, next) => {
     // console.log('Error status: ', error.status);
     // console.log('Message: ', error.message);

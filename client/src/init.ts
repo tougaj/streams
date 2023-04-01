@@ -8,16 +8,16 @@ export interface IErrorResponse {
 export const DEFAULTS = {
 	pageTitle: 'Streams',
 	fluid: true,
-	streamServer: {
-		address: 'http://132.226.223.144',
-		hlsPort: 8888,
-		webRtcPort: 9889,
-		apiPort: 9997,
-	},
 };
 
 export const STREAMS_UPDATE_INTERVAL = (1 * 30 + 0) * 1000;
 export const THUMBNAILS_UPDATE_INTERVAL = (1 * 15 + 0) * 1000;
+
+export interface IStreamServerParams {
+	address: string | null;
+	hlsPort: number | null;
+	webRtcPort: number | null;
+}
 
 interface IServerStreamSource {
 	type: string;
