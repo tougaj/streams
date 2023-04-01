@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import { BsFillCameraVideoFill, BsPower } from 'react-icons/bs';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import TextIcon from '../../components/textIcon';
+import styled from 'styled-components';
 import { DEFAULTS } from '../../init';
 import { selectAppState, useAppSelector } from '../../store';
 import { StickyDiv } from '../../styledComponents';
@@ -16,7 +16,7 @@ const MainStream = () => {
 	const { streamServerParams } = useAppSelector(selectAppState);
 	const [live, setLive] = useState(!!streamServerParams?.webRtcPort);
 
-	const onLiveClick = (event: React.MouseEvent<HTMLInputElement>) => {
+	const onLiveClick = () => {
 		setLive((live) => !live);
 	};
 
@@ -34,29 +34,34 @@ const MainStream = () => {
 				<h3 className="text-center m-0 text-truncate">
 					<BsFillCameraVideoFill /> {streamId}
 				</h3>
-				{streamServerParams?.hlsPort && streamServerParams.webRtcPort && (
-					<Form.Check
-						type="switch"
-						id="cbMainIsLive"
-						label={
-							<>
-								<span className="d-none d-sm-inline">Пряма трансляція</span>
-								<span className="d-sm-none">live</span>
-							</>
-						}
-						checked={live}
-						onClick={onLiveClick}
-						className="text-nowrap"
-					/>
-				)}
-				<Link to="/stream" className="btn btn-outline-secondary">
+				<ToggleButtonGroup type="radio" onChange={onLiveClick as any} value={live ? 1 : 0} name="rgStreamSource">
+					{streamServerParams?.hlsPort && (
+						<ToggleButton id="rgHLS" value={0} variant="outline-primary" title="Використовувати HLS">
+							Трансляція
+						</ToggleButton>
+					)}
+					{streamServerParams?.webRtcPort && (
+						<ToggleButton id="rgWebRTC" value={1} variant="outline-primary" title="Використовувати WebRTC">
+							Джерело
+						</ToggleButton>
+					)}
+				</ToggleButtonGroup>
+				{/* <Link to="/stream" className="btn btn-outline-secondary">
 					<TextIcon Icon={BsPower} className="icon-lg">
 						<span className="d-none d-sm-inline">Вимкнути</span>
 					</TextIcon>
-				</Link>
+				</Link> */}
 			</div>
+			<PowerOff to="/stream" className="btn btn-sm btn-danger position-absolute" title="Припинити перегляд">
+				<BsPower className="icon-lg mt-n1" />
+			</PowerOff>
 		</StickyDiv>
 	);
 };
 
 export default MainStream;
+
+const PowerOff = styled(Link)`
+	top: 0.25rem;
+	right: 0.25rem;
+`;
