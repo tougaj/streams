@@ -22,14 +22,26 @@ const MainStream = () => {
 	return (
 		<StickyDiv className="mb-2">
 			<Stream streamId={streamId} live={live} />
-			<div className="d-flex justify-content-between align-items-center my-2">
-				<h3 className="text-center m-0">
+			<div className="d-flex justify-content-between align-items-center my-2 gap-1">
+				<h3 className="text-center m-0 text-truncate">
 					<BsFillCameraVideoFill /> {streamId}
 				</h3>
-				<Form.Check type="switch" id="cbMainIsLive" label="Пряма трансляція" checked={live} onClick={onLiveClick} />
+				<Form.Check
+					type="switch"
+					id="cbMainIsLive"
+					label={
+						<>
+							<span className="d-none d-sm-inline">Пряма трансляція</span>
+							<span className="d-sm-none">live</span>
+						</>
+					}
+					checked={live}
+					onClick={onLiveClick}
+					className="text-truncate"
+				/>
 				<Link to="/stream" className="btn btn-outline-secondary">
 					<TextIcon Icon={BsPower} className="icon-lg">
-						Вимкнути
+						<span className="d-none d-sm-inline">Вимкнути</span>
 					</TextIcon>
 				</Link>
 			</div>
